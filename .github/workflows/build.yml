@@ -34,8 +34,8 @@ jobs:
           channel: stable
           cache: true
 
-      - name: 📦 Installer Flet
-        run: pip install flet==0.24.1
+      - name: 📦 Installer Flet 0.27
+        run: pip install "flet==0.27.6"
 
       - name: 🔧 Accepter les licences Android
         run: yes | flutter doctor --android-licenses || true
