@@ -1,0 +1,10 @@
+[tool.flet.app]
+name = "LotoQuine"
+module_name = "main"
+
+[tool.flet.android]
+permissions = [
+    "android.permission.INTERNET",
+    "android.permission.ACCESS_NETWORK_STATE",
+    "android.permission.ACCESS_WIFI_STATE",
+]
