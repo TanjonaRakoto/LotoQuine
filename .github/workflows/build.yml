@@ -27,21 +27,28 @@ jobs:
           distribution: temurin
           java-version: "17"
 
-      - name: 🦋 Installer Flutter 3.27
+      - name: 🦋 Installer Flutter 3.24.5
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.27.4"
+          flutter-version: "3.24.5"
           channel: stable
           cache: true
 
-      - name: 📦 Installer Flet 0.27
-        run: pip install "flet==0.27.6"
+      - name: 📦 Installer Flet 0.25.2
+        run: pip install "flet==0.25.2"
 
       - name: 🔧 Accepter les licences Android
         run: yes | flutter doctor --android-licenses || true
 
+      - name: ⬇️ Downgrader Android SDK build-tools
+        run: |
+          echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "build-tools;34.0.0"
+          echo "y" | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-34"
+
       - name: 🏗️ Build APK
         run: flet build apk --project "LotoQuine" --org com.loto.quine --module-name main
+        env:
+          ANDROID_SDK_ROOT: ${{ env.ANDROID_HOME }}
 
       - name: 📤 Uploader l'APK
         uses: actions/upload-artifact@v4
